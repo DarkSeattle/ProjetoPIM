@@ -1,4 +1,5 @@
-﻿using backendAPI.DTOs;
+﻿// Controllers/AuthController.cs
+using backendAPI.DTOs;
 using backendAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,7 @@ namespace backendAPI.Controllers
     {
         private readonly IAuthService _authService;
 
+        // ✅ REMOVER a dependência do PasswordService
         public AuthController(IAuthService authService)
         {
             _authService = authService;
@@ -18,8 +20,6 @@ namespace backendAPI.Controllers
         /// <summary>
         /// Login de usuário
         /// </summary>
-        /// <param name="loginDto">Email e senha</param>
-        /// <returns>Dados do usuário se login for bem-sucedido</returns>
         [HttpPost("login")]
         public async Task<ActionResult<LoginResponseDto>> Login([FromBody] LoginDto loginDto)
         {
@@ -45,8 +45,6 @@ namespace backendAPI.Controllers
         /// <summary>
         /// Registro de novo usuário
         /// </summary>
-        /// <param name="registerDto">Dados do novo usuário</param>
-        /// <returns>Usuário criado</returns>
         [HttpPost("register")]
         public async Task<ActionResult<ApiResponse<UserDto>>> Register([FromBody] RegisterDto registerDto)
         {
@@ -69,8 +67,5 @@ namespace backendAPI.Controllers
 
             return CreatedAtAction(nameof(Register), result);
         }
-
-
-
     }
 }

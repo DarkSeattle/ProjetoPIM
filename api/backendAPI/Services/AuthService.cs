@@ -1,4 +1,5 @@
-﻿using backendAPI.Data;
+﻿// Services/AuthService.cs
+using backendAPI.Data;
 using backendAPI.DTOs;
 using backendAPI.Models;
 using Microsoft.EntityFrameworkCore;
@@ -8,16 +9,13 @@ namespace backendAPI.Services
     public class AuthService : IAuthService
     {
         private readonly AppDbContext _context;
-        private readonly IPasswordService _passwordService;
+        private readonly ITokenService _tokenService;
 
-        // 👇 PASSO 1: INJETAR O SERVIÇO DE TOKEN
-        private readonly ITokenService _tokenService; // Assumindo que você tenha um ITokenService
-
-        public AuthService(AppDbContext context, IPasswordService passwordService, ITokenService tokenService) // E adicionar ele aqui
+        // ✅ REMOVER a dependência do PasswordService
+        public AuthService(AppDbContext context, ITokenService tokenService)
         {
             _context = context;
-            _passwordService = passwordService;
-            _tokenService = tokenService; // E aqui
+            _tokenService = tokenService;
         }
 
         public async Task<LoginResponseDto> LoginAsync(LoginDto loginDto)
@@ -31,24 +29,23 @@ namespace backendAPI.Services
                 return new LoginResponseDto
                 {
                     Success = false,
-                    Message = "Email ou senha inválidos."
+                    Message = "Email não encontrado."
                 };
             }
 
-            // Verificar senha
-            if (!_passwordService.VerifyPassword(loginDto.Password, user.PasswordHash))
+            // ✅ SIMPLES: Comparação direta da senha em texto puro
+            if (loginDto.Password != user.PasswordHash)
             {
                 return new LoginResponseDto
                 {
                     Success = false,
-                    Message = "Email ou senha inválidos."
+                    Message = "Senha incorreta."
                 };
             }
 
-            // 👇 PASSO 2: GERAR O TOKEN APÓS O LOGIN
-            var token = _tokenService.GenerateToken(user); // Gerar o token para o usuário
+            // Gerar token
+            var token = _tokenService.GenerateToken(user);
 
-            // Login bem-sucedido
             return new LoginResponseDto
             {
                 Success = true,
@@ -61,7 +58,6 @@ namespace backendAPI.Services
                     Role = user.Role,
                     CreatedAt = user.CreatedAt
                 },
-                // 👇 PASSO 3: INCLUIR O TOKEN NA RESPOSTA
                 Token = token
             };
         }
@@ -85,9 +81,10 @@ namespace backendAPI.Services
             {
                 Name = registerDto.Name,
                 Email = registerDto.Email,
-                PasswordHash = _passwordService.HashPassword(registerDto.Password),
-                Role = registerDto.Role, // O Role deve vir do DTO
-                CreatedAt = DateTime.Now.ToUniversalTime() // Usar UTC é uma boa prática
+                // ✅ SIMPLES: Salvar senha diretamente
+                PasswordHash = registerDto.Password,
+                Role = registerDto.Role,
+                CreatedAt = DateTime.Now.ToUniversalTime()
             };
 
             _context.Users.Add(user);

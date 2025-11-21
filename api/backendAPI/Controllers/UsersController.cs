@@ -15,13 +15,13 @@ namespace backendAPI.Controllers
     public class UsersController : ControllerBase
     {
         private readonly AppDbContext _context;
-        private readonly IPasswordService _passwordService;
 
-        public UsersController(AppDbContext context, IPasswordService passwordService)
+        // ✅ REMOVER a dependência do PasswordService
+        public UsersController(AppDbContext context)
         {
             _context = context;
-            _passwordService = passwordService;
         }
+
 
         /// <summary>
         /// Listar todos os usuários (Admin)
@@ -69,9 +69,6 @@ namespace backendAPI.Controllers
             return Ok(ApiResponse<UserDto>.SuccessResponse(userDto));
         }
 
-        /// <summary>
-        /// Atualizar usuário
-        /// </summary>
         [HttpPut("{id}")]
         public async Task<ActionResult<ApiResponse<UserDto>>> UpdateUser(int id, [FromBody] RegisterDto updateDto)
         {
@@ -93,15 +90,23 @@ namespace backendAPI.Controllers
                 ));
             }
 
+            // Validar role
+            var validRoles = new[] { "user", "tecnico", "admin" };
+            if (!validRoles.Contains(updateDto.Role.ToLower()))
+            {
+                return BadRequest(ApiResponse<UserDto>.ErrorResponse(
+                    "Role inválido. Use: user, tecnico ou admin"));
+            }
+
             // Atualizar dados
             user.Name = updateDto.Name;
             user.Email = updateDto.Email;
             user.Role = updateDto.Role;
 
-            // Atualizar senha apenas se foi fornecida
+            // ✅ SIMPLES: Atualizar senha diretamente
             if (!string.IsNullOrEmpty(updateDto.Password))
             {
-                user.PasswordHash = _passwordService.HashPassword(updateDto.Password);
+                user.PasswordHash = updateDto.Password;
             }
 
             await _context.SaveChangesAsync();
@@ -117,7 +122,6 @@ namespace backendAPI.Controllers
 
             return Ok(ApiResponse<UserDto>.SuccessResponse(userDto, "Usuário atualizado com sucesso!"));
         }
-
         /// <summary>
         /// Deletar usuário (Admin)
         /// </summary>

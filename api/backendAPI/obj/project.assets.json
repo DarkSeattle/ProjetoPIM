@@ -4915,11 +4915,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\filip\\Desktop\\Nova pasta (31)\\api\\backendAPI\\backendAPI.csproj",
+      "projectUniqueName": "C:\\Users\\filip\\Desktop\\ProjetoPIM\\api\\backendAPI\\backendAPI.csproj",
       "projectName": "backendAPI",
-      "projectPath": "C:\\Users\\filip\\Desktop\\Nova pasta (31)\\api\\backendAPI\\backendAPI.csproj",
+      "projectPath": "C:\\Users\\filip\\Desktop\\ProjetoPIM\\api\\backendAPI\\backendAPI.csproj",
       "packagesPath": "C:\\Users\\filip\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\filip\\Desktop\\Nova pasta (31)\\api\\backendAPI\\obj\\",
+      "outputPath": "C:\\Users\\filip\\Desktop\\ProjetoPIM\\api\\backendAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

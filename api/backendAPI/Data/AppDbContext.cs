@@ -1,4 +1,4 @@
-﻿using BCrypt.Net;
+﻿
 using backendAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -64,16 +64,17 @@ namespace backendAPI.Data
 
             // Criar um usuário admin padrão
             modelBuilder.Entity<User>().HasData(
-                new User
-                {
-                    Id = 1,
-                    Name = "Administrador",
-                    Email = "admin@suporte.com",
-                    PasswordHash = "$2a$11$Xj8xGJ5M3q3Z1aK8L5K5K.5K5K5K5K5K5K5K5K5K5K5K5K5K5K5K5K", // Senha: admin123
-                    Role = "admin",
-                    CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc)
-                }
-            );
+                    new User
+            {
+                Id = 1,
+                Name = "Administrador",
+                Email = "admin@suporte.com",
+                // ✅ SENHA EM TEXTO PURO
+                PasswordHash = "admin123",
+                        Role = "admin",
+                CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+            }
+             );
         }
     }
 }

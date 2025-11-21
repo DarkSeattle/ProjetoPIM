@@ -1,10 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\filip\\Desktop\\Nova pasta (31)\\api\\backendAPI\\",
+  "WorkspaceRootPath": "C:\\Users\\filip\\Desktop\\ProjetoPIM\\api\\backendAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\filip\\Desktop\\Nova pasta (31)\\api\\backendAPI\\Migrations\\20251119213335_NovaMigration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20251119213335_NovaMigration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C75F2197-303E-48DC-A30A-A7337795421F}|backendAPI.csproj|c:\\users\\filip\\desktop\\projetopim\\api\\backendapi\\backendapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{C75F2197-303E-48DC-A30A-A7337795421F}|backendAPI.csproj|solutionrelative:backendapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C75F2197-303E-48DC-A30A-A7337795421F}|backendAPI.csproj|c:\\users\\filip\\desktop\\projetopim\\api\\backendapi\\controllers\\ticketscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C75F2197-303E-48DC-A30A-A7337795421F}|backendAPI.csproj|solutionrelative:controllers\\ticketscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +23,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "20251119213335_NovaMigration.cs",
-              "DocumentMoniker": "C:\\Users\\filip\\Desktop\\Nova pasta (31)\\api\\backendAPI\\Migrations\\20251119213335_NovaMigration.cs",
-              "RelativeDocumentMoniker": "Migrations\\20251119213335_NovaMigration.cs",
-              "ToolTip": "C:\\Users\\filip\\Desktop\\Nova pasta (31)\\api\\backendAPI\\Migrations\\20251119213335_NovaMigration.cs",
-              "RelativeToolTip": "Migrations\\20251119213335_NovaMigration.cs",
+              "Title": "backendAPI",
+              "DocumentMoniker": "C:\\Users\\filip\\Desktop\\ProjetoPIM\\api\\backendAPI\\backendAPI.csproj",
+              "RelativeDocumentMoniker": "backendAPI.csproj",
+              "ToolTip": "C:\\Users\\filip\\Desktop\\ProjetoPIM\\api\\backendAPI\\backendAPI.csproj",
+              "RelativeToolTip": "backendAPI.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-21T14:15:42.91Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TicketsController.cs",
+              "DocumentMoniker": "C:\\Users\\filip\\Desktop\\ProjetoPIM\\api\\backendAPI\\Controllers\\TicketsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TicketsController.cs",
+              "ToolTip": "C:\\Users\\filip\\Desktop\\ProjetoPIM\\api\\backendAPI\\Controllers\\TicketsController.cs",
+              "RelativeToolTip": "Controllers\\TicketsController.cs",
+              "ViewState": "AgIAABYBAAAAAAAAAAAuwLABAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T21:33:36.074Z",
+              "WhenOpened": "2025-11-20T19:32:42.754Z",
               "EditorCaption": ""
             }
           ]

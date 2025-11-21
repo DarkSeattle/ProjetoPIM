@@ -53,7 +53,7 @@ namespace backendAPI.Controllers
         public async Task<ActionResult<ApiResponse<List<TicketDto>>>> GetTicketsByUser(int userId)
         {
             var tickets = await _context.Tickets
-                .Include(t => t.Messages)
+               .Include(t => t.Messages)
                 .Where(t => t.UserId == userId)
                 .OrderByDescending(t => t.CreatedAt)
                 .Select(t => new TicketDto
@@ -251,6 +251,183 @@ namespace backendAPI.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(ApiResponse<object>.SuccessResponse(null, "Ticket deletado com sucesso!"));
+        }
+
+        // NOVOS ENDPOINTS ESPECÍFICOS PARA O FRONTEND
+        [HttpGet("user-simple/{userId}")]
+        public async Task<ActionResult<ApiResponse<List<SimpleTicketDto>>>> GetUserTicketsSimple(int userId)
+        {
+            try
+            {
+                var tickets = await _context.Tickets
+                    .Where(t => t.UserId == userId)
+                    .Where(t => t.Status == "Aberto") // ✅ Apenas tickets abertos
+                    .OrderByDescending(t => t.CreatedAt)
+                    .Select(t => new SimpleTicketDto
+                    {
+                        Id = t.Id,
+                        UserName = t.UserName,
+                        Severity = t.Severity,
+                        Description = t.Description,
+                        Status = t.Status,
+                        CreatedAt = t.CreatedAt
+                    })
+                    .ToListAsync();
+
+                // ✅ USAR O MESMO MÉTODO DE SUCESSO (para manter consistência)
+                return Ok(ApiResponse<List<SimpleTicketDto>>.SuccessResponse(tickets));
+            }
+            catch (Exception ex)
+            {
+                // ✅ USAR O MESMO MÉTODO DE ERRO
+                return BadRequest(ApiResponse<List<SimpleTicketDto>>.ErrorResponse($"Erro ao buscar chamados: {ex.Message}"));
+            }
+        }
+
+        [HttpGet("all-simple")]
+        public async Task<ActionResult<ApiResponse<List<SimpleTicketDto>>>> GetAllTicketsSimple()
+        {
+            try
+            {
+                var tickets = await _context.Tickets
+                    .Where(t => t.Status == "Aberto") // ✅ Apenas tickets abertos
+                    .OrderByDescending(t => t.CreatedAt)
+                    .Select(t => new SimpleTicketDto
+                    {
+                        Id = t.Id,
+                        UserName = t.UserName,
+                        Severity = t.Severity,
+                        Description = t.Description,
+                        Status = t.Status,
+                        CreatedAt = t.CreatedAt
+                    })
+                    .ToListAsync();
+
+                return Ok(ApiResponse<List<SimpleTicketDto>>.SuccessResponse(tickets));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ApiResponse<List<SimpleTicketDto>>.ErrorResponse($"Erro: {ex.Message}"));
+            }
+        }
+        /// <summary>
+        /// Buscar um ticket específico pelo ID do ticket
+        /// </summary>
+        [HttpGet("simples/{id}")] // ✅ Diferente do [HttpGet("user/{userId}")]
+        public async Task<ActionResult<ApiResponse<TicketDto>>> GetTicketById(int id) // ✅ id do ticket, não userId
+        {
+            try
+            {
+                var ticket = await _context.Tickets
+                    .Include(t => t.Messages)
+                    .Where(t => t.Id == id) // ✅ Busca pelo ID do ticket
+                    .Select(t => new TicketDto
+                    {
+                        Id = t.Id,
+                        UserId = t.UserId,
+                        UserName = t.UserName,
+                        Severity = t.Severity,
+                        Description = t.Description,
+                        Status = t.Status,
+                        CreatedAt = t.CreatedAt,
+                        ClosedAt = t.ClosedAt,
+                        MessageCount = t.Messages!.Count
+                    })
+                    .FirstOrDefaultAsync(); // ✅ FirstOrDefault, não ToList
+
+                if (ticket == null)
+                {
+                    return NotFound(ApiResponse<TicketDto>.ErrorResponse("Ticket não encontrado"));
+                }
+
+                return Ok(ApiResponse<TicketDto>.SuccessResponse(ticket));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ApiResponse<TicketDto>.ErrorResponse($"Erro ao buscar ticket: {ex.Message}"));
+            }
+        }
+
+
+        // Adicione estas ações ao seu TicketsController.cs
+
+        /// <summary>
+        /// Contar total de tickets
+        /// </summary>
+        [HttpGet("count")]
+        public async Task<ActionResult<ApiResponse<int>>> GetTotalTickets()
+        {
+            var count = await _context.Tickets.CountAsync();
+            return Ok(ApiResponse<int>.SuccessResponse(count));
+        }
+
+        /// <summary>
+        /// Contar tickets abertos/em andamento
+        /// </summary>
+        [HttpGet("count/abertos")]
+        public async Task<ActionResult<ApiResponse<int>>> GetTicketsAbertos()
+        {
+            var count = await _context.Tickets
+                .Where(t => t.Status == "aberto" || t.Status == "em_andamento")
+                .CountAsync();
+            return Ok(ApiResponse<int>.SuccessResponse(count));
+        }
+
+        /// <summary>
+        /// Contar tickets concluídos
+        /// </summary>
+        [HttpGet("count/concluidos")]
+        public async Task<ActionResult<ApiResponse<int>>> GetTicketsConcluidos()
+        {
+            var count = await _context.Tickets
+                .Where(t => t.Status == "fechado" || t.Status == "finalizado")
+                .CountAsync();
+            return Ok(ApiResponse<int>.SuccessResponse(count));
+        }
+
+        /// <summary>
+        /// Obter estatísticas de tickets por gravidade
+        /// </summary>
+        [HttpGet("stats/gravidade")]
+        public async Task<ActionResult<ApiResponse<Dictionary<string, int>>>> GetStatsByGravidade()
+        {
+            var stats = await _context.Tickets
+                .GroupBy(t => t.Severity)
+                .Select(g => new { Gravidade = g.Key, Count = g.Count() })
+                .ToDictionaryAsync(x => x.Gravidade, x => x.Count);
+
+            return Ok(ApiResponse<Dictionary<string, int>>.SuccessResponse(stats));
+        }
+
+        /// <summary>
+        /// Obter estatísticas de tickets por status
+        /// </summary>
+        [HttpGet("stats/status")]
+        public async Task<ActionResult<ApiResponse<Dictionary<string, int>>>> GetStatsByStatus()
+        {
+            var stats = await _context.Tickets
+                .GroupBy(t => t.Status)
+                .Select(g => new { Status = g.Key, Count = g.Count() })
+                .ToDictionaryAsync(x => x.Status, x => x.Count);
+
+            return Ok(ApiResponse<Dictionary<string, int>>.SuccessResponse(stats));
+        }
+
+        /// <summary>
+        /// Top usuários com mais tickets
+        /// </summary>
+        [HttpGet("stats/top-usuarios")]
+        public async Task<ActionResult<ApiResponse<Dictionary<string, int>>>> GetTopUsuarios()
+        {
+            var stats = await _context.Tickets
+                .Include(t => t.User)
+                .GroupBy(t => t.User.Name)
+                .Select(g => new { Usuario = g.Key, Count = g.Count() })
+                .OrderByDescending(x => x.Count)
+                .Take(10)
+                .ToDictionaryAsync(x => x.Usuario, x => x.Count);
+
+            return Ok(ApiResponse<Dictionary<string, int>>.SuccessResponse(stats));
         }
     }
 }
