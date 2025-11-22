@@ -47,7 +47,7 @@ function loadUserSession() {
   if (!raw) return null;
   try {
     return JSON.parse(raw);
-  } catch (err) {
+  } catch {
     return null;
   }
 }
@@ -122,15 +122,15 @@ const API = {
         body: JSON.stringify({ email, password })
       });
 
-      const parsed = await parseApiResponse(response);
-      const payload = parsed.data || {};
+      const json = await response.json();
+      const ok = json && json.success === true;
 
       return {
-        ok: parsed.ok,
-        user: payload.user || payload.User || null,
-        token: payload.token || payload.Token || null,
-        message: parsed.message || payload.message,
-        error: parsed.ok ? null : (parsed.message || 'Falha no login')
+        ok,
+        user: json.user || null,
+        token: json.token || null,
+        message: json.message || null,
+        error: ok ? null : (json.message || 'Falha no login')
       };
     } catch (err) {
       return { ok: false, error: err.message };
@@ -256,6 +256,7 @@ function handleLogout() {
 // =========================================================
 async function handleLogin(event) {
   event.preventDefault();
+
   const email = (document.getElementById('email')?.value || '').trim();
   const password = (document.getElementById('senha')?.value || '').trim();
 
@@ -265,6 +266,7 @@ async function handleLogin(event) {
   }
 
   const result = await API.login(email, password);
+
   if (!result.ok || !result.user || !result.token) {
     showAlert(result.error || 'Login inválido', 'error');
     return;
@@ -272,7 +274,7 @@ async function handleLogin(event) {
 
   setToken(result.token);
   state.user = result.user;
-  state.role = normalizeRole(result.user.role || result.user.Role);
+  state.role = (result.user.role || '').toLowerCase();
   saveUserSession(state.user);
 
   showAlert(result.message || 'Login realizado', 'success');
@@ -295,7 +297,15 @@ function mapTicket(raw) {
 }
 
 function statusIsClosed(status) {
-  return ['fechado', 'concluido', 'finalizado'].includes((status || '').toLowerCase());
+  return ['fechado', 'concluido', 'finalizado'].includes(
+    (status || '').toLowerCase()
+  );
+}
+
+// técnico só vê chamados que realmente foram encaminhados pra ele
+function isTechOpenStatus(status) {
+  const s = (status || '').toLowerCase();
+  return s === 'em_andamento' || s === 'em_atendimento';
 }
 
 // =========================================================
@@ -323,7 +333,8 @@ function renderUserTickets(tickets) {
   const tbody = document.getElementById('user-hub-tbody');
   if (!tbody) return;
 
-  const activeTab = document.querySelector('.user-tab.active')?.dataset.tab || 'abertos';
+  const activeTab =
+    document.querySelector('.user-tab.active')?.dataset.tab || 'abertos';
   const filtered = tickets.filter(t =>
     activeTab === 'abertos' ? !statusIsClosed(t.status) : statusIsClosed(t.status)
   );
@@ -343,7 +354,9 @@ function renderUserTickets(tickets) {
       <td>${ticket.status || '-'}</td>
       <td><button class="btn" data-ticket="${ticket.id}">Chat</button></td>
     `;
-    tr.querySelector('button')?.addEventListener('click', () => openUserChat(ticket));
+    tr
+      .querySelector('button')
+      ?.addEventListener('click', () => openUserChat(ticket));
     tbody.appendChild(tr);
   });
 }
@@ -395,11 +408,17 @@ function backToUserHub() {
 function openUserChat(ticket) {
   state.currentTicketId = ticket.id;
   const header = document.getElementById('user-chat-header');
-  if (header) header.textContent = `Chamado #${ticket.id} • ${ticket.description || ''}`;
+  if (header)
+    header.textContent = `Chamado #${ticket.id} • ${
+      ticket.description || ''
+    }`;
   setRoute(ROUTES.userChat);
   loadMessagesForRole('user');
   teardownChatPolling();
-  state.messageTimer = setInterval(() => loadMessagesForRole('user', true), 4000);
+  state.messageTimer = setInterval(
+    () => loadMessagesForRole('user', true),
+    4000
+  );
 }
 
 async function loadMessagesForRole(role, silent = false) {
@@ -422,9 +441,10 @@ async function loadMessagesForRole(role, silent = false) {
 }
 
 function renderMessages(messages, role) {
-  const target = role === 'tech'
-    ? document.getElementById('tech-chatbox')
-    : document.getElementById('user-chatbox');
+  const target =
+    role === 'tech'
+      ? document.getElementById('tech-chatbox')
+      : document.getElementById('user-chatbox');
   if (!target) return;
 
   target.innerHTML = '';
@@ -437,7 +457,9 @@ function renderMessages(messages, role) {
     const div = document.createElement('div');
     div.className = `msg msg-${msg.senderRole || 'user'}`;
     div.innerHTML = `
-      <div class="msg-meta">${msg.senderName || msg.senderRole} • ${msg.createdAt || ''}</div>
+      <div class="msg-meta">${msg.senderName || msg.senderRole} • ${
+      msg.createdAt || ''
+    }</div>
       <div class="msg-text">${msg.content || ''}</div>
     `;
     target.appendChild(div);
@@ -472,20 +494,33 @@ async function sendUserMessage() {
 
 async function markTicketComplete() {
   if (!state.currentTicketId) return;
-  const res = await API.put(`/api/Tickets/${state.currentTicketId}/status`, { status: 'fechado' });
+  const res = await API.put(
+    `/api/Tickets/${state.currentTicketId}/status`,
+    { status: 'fechado' }
+  );
   if (!res.ok) {
     showAlert(res.error || 'Erro ao fechar chamado', 'error');
     return;
   }
 
   showAlert('Chamado marcado como concluído', 'success');
-  setRoute(ROUTES.userHub);
-  loadUserTickets();
+
+  // se for técnico, volta pra lista do técnico
+  if (state.role === 'tech' || state.role === 'tecnico') {
+    setRoute(ROUTES.techHome);
+    loadTechTickets();
+  } else {
+    setRoute(ROUTES.userHub);
+    loadUserTickets();
+  }
 }
 
 async function requestTechSupport() {
   if (!state.currentTicketId) return;
-  const res = await API.put(`/api/Tickets/${state.currentTicketId}/status`, { status: 'em_andamento' });
+  const res = await API.put(
+    `/api/Tickets/${state.currentTicketId}/status`,
+    { status: 'em_andamento' }
+  );
   if (!res.ok) {
     showAlert(res.error || 'Não foi possível chamar o técnico', 'error');
     return;
@@ -504,7 +539,9 @@ async function loadTechTickets() {
 
   const res = await API.get('/api/Tickets');
   if (!res.ok) {
-    tbody.innerHTML = `<tr><td colspan="5">${res.error || 'Erro ao carregar chamados'}</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="5">${
+      res.error || 'Erro ao carregar chamados'
+    }</td></tr>`;
     return;
   }
 
@@ -517,9 +554,13 @@ function renderTechTickets(tickets) {
   if (!tbody) return;
 
   const activeTab = document.querySelector('.tab.active')?.dataset.tab || 'abertos';
-  const filtered = tickets.filter(t =>
-    activeTab === 'abertos' ? !statusIsClosed(t.status) : statusIsClosed(t.status)
-  );
+
+  let filtered;
+  if (activeTab === 'abertos') {
+    filtered = tickets.filter(t => isTechOpenStatus(t.status));
+  } else {
+    filtered = tickets.filter(t => statusIsClosed(t.status));
+  }
 
   if (!filtered.length) {
     tbody.innerHTML = '<tr><td colspan="5">Nenhum chamado encontrado.</td></tr>';
@@ -536,7 +577,9 @@ function renderTechTickets(tickets) {
       <td>${ticket.description || '-'}</td>
       <td><button class="btn" data-ticket="${ticket.id}">Chat</button></td>
     `;
-    tr.querySelector('button')?.addEventListener('click', () => openTechChat(ticket));
+    tr
+      .querySelector('button')
+      ?.addEventListener('click', () => openTechChat(ticket));
     tbody.appendChild(tr);
   });
 }
@@ -544,11 +587,15 @@ function renderTechTickets(tickets) {
 function openTechChat(ticket) {
   state.currentTicketId = ticket.id;
   const header = document.getElementById('tech-ticket-head');
-  if (header) header.textContent = `Chamado #${ticket.id} • ${ticket.userName || ''}`;
+  if (header)
+    header.textContent = `Chamado #${ticket.id} • ${ticket.userName || ''}`;
   setRoute(ROUTES.techChat);
   loadMessagesForRole('tech');
   teardownChatPolling();
-  state.messageTimer = setInterval(() => loadMessagesForRole('tech', true), 4000);
+  state.messageTimer = setInterval(
+    () => loadMessagesForRole('tech', true),
+    4000
+  );
 }
 
 async function sendTechMessage() {
@@ -584,14 +631,15 @@ let gravidadesChartInstance = null;
 let statusChartInstance = null;
 
 async function loadAdminMetrics() {
-  const [totalRes, openRes, closedRes, statsGrav, statsStatus, topUsers] = await Promise.all([
-    API.get('/api/Tickets/count'),
-    API.get('/api/Tickets/count/abertos'),
-    API.get('/api/Tickets/count/concluidos'),
-    API.get('/api/Tickets/stats/gravidade'),
-    API.get('/api/Tickets/stats/status'),
-    API.get('/api/Tickets/stats/top-usuarios')
-  ]);
+  const [totalRes, openRes, closedRes, statsGrav, statsStatus, topUsers] =
+    await Promise.all([
+      API.get('/api/Tickets/count'),
+      API.get('/api/Tickets/count/abertos'),
+      API.get('/api/Tickets/count/concluidos'),
+      API.get('/api/Tickets/stats/gravidade'),
+      API.get('/api/Tickets/stats/status'),
+      API.get('/api/Tickets/stats/top-usuarios')
+    ]);
 
   const setValue = (id, value) => {
     const el = document.getElementById(id);
@@ -623,32 +671,49 @@ function renderCharts({ tickets, bySeverity, byStatus, byUser }) {
   const ctxStatus = document.getElementById('statusChart');
 
   if (!Object.keys(byUser).length) {
-    tickets.forEach(t => { byUser[t.userName] = (byUser[t.userName] || 0) + 1; });
+    tickets.forEach(t => {
+      byUser[t.userName] = (byUser[t.userName] || 0) + 1;
+    });
   }
   if (!Object.keys(bySeverity).length) {
-    tickets.forEach(t => { bySeverity[t.severity] = (bySeverity[t.severity] || 0) + 1; });
+    tickets.forEach(t => {
+      bySeverity[t.severity] = (bySeverity[t.severity] || 0) + 1;
+    });
   }
   if (!Object.keys(byStatus).length) {
-    tickets.forEach(t => { byStatus[t.status] = (byStatus[t.status] || 0) + 1; });
+    tickets.forEach(t => {
+      byStatus[t.status] = (byStatus[t.status] || 0) + 1;
+    });
   }
 
   if (!chartsCreated) {
     chartsCreated = true;
     ticketsChartInstance = new Chart(ctxTickets, {
       type: 'bar',
-      data: { labels: Object.keys(byUser), datasets: [{ label: 'Chamados por usuário', data: Object.values(byUser) }] },
+      data: {
+        labels: Object.keys(byUser),
+        datasets: [
+          { label: 'Chamados por usuário', data: Object.values(byUser) }
+        ]
+      },
       options: { responsive: true }
     });
 
     gravidadesChartInstance = new Chart(ctxGravidades, {
       type: 'pie',
-      data: { labels: Object.keys(bySeverity), datasets: [{ data: Object.values(bySeverity) }] },
+      data: {
+        labels: Object.keys(bySeverity),
+        datasets: [{ data: Object.values(bySeverity) }]
+      },
       options: { responsive: true }
     });
 
     statusChartInstance = new Chart(ctxStatus, {
       type: 'doughnut',
-      data: { labels: Object.keys(byStatus), datasets: [{ data: Object.values(byStatus) }] },
+      data: {
+        labels: Object.keys(byStatus),
+        datasets: [{ data: Object.values(byStatus) }]
+      },
       options: { responsive: true }
     });
   } else {
@@ -657,11 +722,13 @@ function renderCharts({ tickets, bySeverity, byStatus, byUser }) {
     ticketsChartInstance.update();
 
     gravidadesChartInstance.data.labels = Object.keys(bySeverity);
-    gravidadesChartInstance.data.datasets[0].data = Object.values(bySeverity);
+    gravidadesChartInstance.data.datasets[0].data =
+      Object.values(bySeverity);
     gravidadesChartInstance.update();
 
     statusChartInstance.data.labels = Object.keys(byStatus);
-    statusChartInstance.data.datasets[0].data = Object.values(byStatus);
+    statusChartInstance.data.datasets[0].data =
+      Object.values(byStatus);
     statusChartInstance.update();
   }
 }
@@ -673,7 +740,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const loginForm = document.getElementById('login-form');
   if (loginForm) loginForm.addEventListener('submit', handleLogin);
 
-  const logoutButton = document.getElementById('logout');
+  const logoutButton = document.getElementById('logout-btn');
   if (logoutButton) logoutButton.addEventListener('click', handleLogout);
 
   const newTicketBtn = document.getElementById('user-hub-new');
@@ -686,36 +753,63 @@ document.addEventListener('DOMContentLoaded', () => {
   if (ticketForm) ticketForm.addEventListener('submit', handleCreateTicket);
 
   const userTabs = document.querySelectorAll('.user-tab');
-  userTabs.forEach(tab => tab.addEventListener('click', () => {
-    userTabs.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    loadUserTickets();
-  }));
+  userTabs.forEach(tab =>
+    tab.addEventListener('click', () => {
+      userTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      loadUserTickets();
+    })
+  );
 
   const techTabs = document.querySelectorAll('.tab');
-  techTabs.forEach(tab => tab.addEventListener('click', () => {
-    techTabs.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    loadTechTickets();
-  }));
+  techTabs.forEach(tab =>
+    tab.addEventListener('click', () => {
+      techTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      loadTechTickets();
+    })
+  );
 
-  document.getElementById('user-send')?.addEventListener('click', sendUserMessage);
-  document.getElementById('user-msg')?.addEventListener('keyup', (e) => { if (e.key === 'Enter') sendUserMessage(); });
-  document.getElementById('user-complete')?.addEventListener('click', markTicketComplete);
-  document.getElementById('btnChamarTecnico')?.addEventListener('click', requestTechSupport);
-  document.getElementById('user-chat-back')?.addEventListener('click', () => {
-    teardownChatPolling();
-    setRoute(ROUTES.userHub);
-    loadUserTickets();
-  });
+  document
+    .getElementById('user-send')
+    ?.addEventListener('click', sendUserMessage);
+  document
+    .getElementById('user-msg')
+    ?.addEventListener('keyup', e => {
+      if (e.key === 'Enter') sendUserMessage();
+    });
+  document
+    .getElementById('user-complete')
+    ?.addEventListener('click', markTicketComplete);
+  document
+    .getElementById('btnChamarTecnico')
+    ?.addEventListener('click', requestTechSupport);
+  document
+    .getElementById('user-chat-back')
+    ?.addEventListener('click', () => {
+      teardownChatPolling();
+      setRoute(ROUTES.userHub);
+      loadUserTickets();
+    });
 
-  document.getElementById('tech-send')?.addEventListener('click', sendTechMessage);
-  document.getElementById('tech-msg')?.addEventListener('keyup', (e) => { if (e.key === 'Enter') sendTechMessage(); });
-  document.getElementById('tech-back')?.addEventListener('click', () => {
-    teardownChatPolling();
-    setRoute(ROUTES.techHome);
-    loadTechTickets();
-  });
+  document
+    .getElementById('tech-send')
+    ?.addEventListener('click', sendTechMessage);
+  document
+    .getElementById('tech-msg')
+    ?.addEventListener('keyup', e => {
+      if (e.key === 'Enter') sendTechMessage();
+    });
+  document
+    .getElementById('tech-back')
+    ?.addEventListener('click', () => {
+      teardownChatPolling();
+      setRoute(ROUTES.techHome);
+      loadTechTickets();
+    });
+  document
+    .getElementById('tech-complete')
+    ?.addEventListener('click', markTicketComplete);
 
   const existingUser = loadUserSession();
   if (existingUser) {

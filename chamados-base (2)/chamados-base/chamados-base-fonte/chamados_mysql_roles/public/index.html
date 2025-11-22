@@ -8,12 +8,15 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="app.js" defer></script>
-
 </head>
 <body>
   <div class="topbar">
     <div class="brand">Chamados</div>
-    <div id="who"></div>
+    <div style="display:flex; align-items:center; gap:12px;">
+      <span id="who"></span>
+      <!-- Botão simples de logout (sem classe vermelha) -->
+      <button id="logout-btn" type="button">Logout</button>
+    </div>
   </div>
 
   <main class="container">
@@ -135,6 +138,8 @@
       <div class="chat-input" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
         <input id="tech-msg" type="text" placeholder="Mensagem ao usuário..." style="flex: 1 1 auto; min-width: 150px;">
         <button id="tech-send" class="btn">Enviar</button>
+        <!-- novo botão para encerrar pelo técnico -->
+        <button id="tech-complete" class="btn secondary">Encerrar chamado</button>
       </div>
     </section>
 
@@ -142,7 +147,6 @@
     <section data-route="admin-metrics" class="hidden">
       <h2 style="margin-bottom: 20px; font-size: 1.5rem; font-weight: 600;">Métricas do Sistema</h2>
 
-      <!-- Cards de métricas com ícones -->
       <div class="admin-metrics">
         <div class="metric-card">
           <div class="metric-content">
@@ -181,7 +185,6 @@
         </div>
       </div>
 
-      <!-- Grid de gráficos - 2 colunas -->
       <div class="chart-grid">
         <div class="chart-container">
           <h3 class="chart-title">Chamados por Usuário</h3>
@@ -207,3 +210,4 @@
   </main>
 </body>
 </html>
+
