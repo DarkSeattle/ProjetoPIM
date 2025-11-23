@@ -24,6 +24,7 @@
         public DateTime CreatedAt { get; set; }
         public DateTime? ClosedAt { get; set; }
         public int MessageCount { get; set; }
+        public bool ResolvedByIa { get; set; }
     }
 
     public class TicketDetailsDto

@@ -989,34 +989,22 @@ canvas {
   }
 }
 
-.logout-btn {
-  padding: 6px 14px;
-  background-color: #b30000;
-  color: #fff;
+.logout-btn, #logout-btn {
+  padding: 8px 14px;
+  background: linear-gradient(135deg, var(--topbar) 0%, #1e4a37 100%);
   border: none;
-  border-radius: 6px;
-  cursor: pointer;
+  color: #fff;
   font-size: 14px;
+  cursor: pointer;
+  border-radius: 8px;
   font-weight: 600;
-  transition: 0.2s;
+  margin-left: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+  transition: all 0.2s ease;
 }
 
-.logout-btn:hover {
-  background-color: #e60000;
-}
-
-.logout-btn {
-  background: transparent;
-  border: none;
-  color: #fff;
-  font-size: 14px;
-  cursor: pointer;
-  padding: 6px 10px;
-  margin-left: 15px;
-  opacity: 0.9;
-  transition: 0.2s;
-}
-
-.logout-btn:hover {
-  opacity: 1;
+.logout-btn:hover, #logout-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+  background: linear-gradient(135deg, #1e4a37 0%, var(--topbar) 100%);
 }

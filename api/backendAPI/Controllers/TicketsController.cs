@@ -1,4 +1,4 @@
-﻿// ========================================
+// ========================================
 // Controllers/TicketsController.cs
 // ========================================
 using backendAPI.Data;
@@ -6,6 +6,7 @@ using backendAPI.DTOs;
 using backendAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace backendAPI.Controllers
 {
@@ -20,9 +21,12 @@ namespace backendAPI.Controllers
             _context = context;
         }
 
-        /// <summary>
-        /// Listar todos os tickets (Admin/Técnico)
-        /// </summary>
+        private static bool ResolvedByIa(Ticket t)
+        {
+            return t.Status.ToLower() == "fechado" &&
+                   !(t.Messages ?? Array.Empty<Message>()).Any(m => (m.SenderRole ?? string.Empty).ToLower() == "tech");
+        }
+
         [HttpGet]
         public async Task<ActionResult<ApiResponse<List<TicketDto>>>> GetAllTickets()
         {
@@ -39,16 +43,14 @@ namespace backendAPI.Controllers
                     Status = t.Status,
                     CreatedAt = t.CreatedAt,
                     ClosedAt = t.ClosedAt,
-                    MessageCount = t.Messages!.Count
+                    MessageCount = t.Messages!.Count,
+                    ResolvedByIa = ResolvedByIa(t)
                 })
                 .ToListAsync();
 
             return Ok(ApiResponse<List<TicketDto>>.SuccessResponse(tickets));
         }
 
-        /// <summary>
-        /// Listar tickets de um usuário específico
-        /// </summary>
         [HttpGet("user/{userId}")]
         public async Task<ActionResult<ApiResponse<List<TicketDto>>>> GetTicketsByUser(int userId)
         {
@@ -66,16 +68,14 @@ namespace backendAPI.Controllers
                     Status = t.Status,
                     CreatedAt = t.CreatedAt,
                     ClosedAt = t.ClosedAt,
-                    MessageCount = t.Messages!.Count
+                    MessageCount = t.Messages!.Count,
+                    ResolvedByIa = ResolvedByIa(t)
                 })
                 .ToListAsync();
 
             return Ok(ApiResponse<List<TicketDto>>.SuccessResponse(tickets));
         }
 
-        /// <summary>
-        /// Obter detalhes de um ticket específico (com mensagens)
-        /// </summary>
         [HttpGet("{id}")]
         public async Task<ActionResult<ApiResponse<TicketDetailsDto>>> GetTicket(int id)
         {
@@ -114,9 +114,6 @@ namespace backendAPI.Controllers
             return Ok(ApiResponse<TicketDetailsDto>.SuccessResponse(ticketDetails));
         }
 
-        /// <summary>
-        /// Criar novo ticket
-        /// </summary>
         [HttpPost]
         public async Task<ActionResult<ApiResponse<TicketDto>>> CreateTicket([FromBody] CreateTicketDto createDto)
         {
@@ -142,7 +139,8 @@ namespace backendAPI.Controllers
                 Description = ticket.Description,
                 Status = ticket.Status,
                 CreatedAt = ticket.CreatedAt,
-                MessageCount = 0
+                MessageCount = 0,
+                ResolvedByIa = false
             };
 
             return CreatedAtAction(
@@ -152,9 +150,6 @@ namespace backendAPI.Controllers
             );
         }
 
-        /// <summary>
-        /// Atualizar status do ticket
-        /// </summary>
         [HttpPut("{id}/status")]
         public async Task<ActionResult<ApiResponse<TicketDto>>> UpdateTicketStatus(
             int id,
@@ -169,13 +164,15 @@ namespace backendAPI.Controllers
 
             ticket.Status = updateDto.Status;
 
-            // Se o status for "fechado", definir a data de fechamento
             if (updateDto.Status.ToLower() == "fechado" && ticket.ClosedAt == null)
             {
                 ticket.ClosedAt = DateTime.Now;
             }
 
             await _context.SaveChangesAsync();
+
+            var hasTechMessage = await _context.Messages.AnyAsync(m =>
+                m.TicketId == ticket.Id && m.SenderRole.ToLower() == "tech");
 
             var ticketDto = new TicketDto
             {
@@ -187,15 +184,13 @@ namespace backendAPI.Controllers
                 Status = ticket.Status,
                 CreatedAt = ticket.CreatedAt,
                 ClosedAt = ticket.ClosedAt,
-                MessageCount = await _context.Messages.CountAsync(m => m.TicketId == ticket.Id)
+                MessageCount = await _context.Messages.CountAsync(m => m.TicketId == ticket.Id),
+                ResolvedByIa = ticket.Status.ToLower() == "fechado" && !hasTechMessage
             };
 
             return Ok(ApiResponse<TicketDto>.SuccessResponse(ticketDto, "Status atualizado com sucesso!"));
         }
 
-        /// <summary>
-        /// Atualizar prioridade (severity) do ticket
-        /// </summary>
         [HttpPut("{id}/severity")]
         public async Task<ActionResult<ApiResponse<TicketDto>>> UpdateTicketSeverity(
             int id,
@@ -208,7 +203,6 @@ namespace backendAPI.Controllers
                 return NotFound(ApiResponse<TicketDto>.ErrorResponse("Ticket não encontrado."));
             }
 
-            // Valida severity
             var validSeverities = new[] { "low", "medium", "high" };
             if (!validSeverities.Contains(updateDto.Severity.ToLower()))
             {
@@ -217,6 +211,9 @@ namespace backendAPI.Controllers
 
             ticket.Severity = updateDto.Severity.ToLower();
             await _context.SaveChangesAsync();
+
+            var hasTechMessage = await _context.Messages.AnyAsync(m =>
+                m.TicketId == ticket.Id && m.SenderRole.ToLower() == "tech");
 
             var ticketDto = new TicketDto
             {
@@ -228,15 +225,13 @@ namespace backendAPI.Controllers
                 Status = ticket.Status,
                 CreatedAt = ticket.CreatedAt,
                 ClosedAt = ticket.ClosedAt,
-                MessageCount = await _context.Messages.CountAsync(m => m.TicketId == ticket.Id)
+                MessageCount = await _context.Messages.CountAsync(m => m.TicketId == ticket.Id),
+                ResolvedByIa = ticket.Status.ToLower() == "fechado" && !hasTechMessage
             };
 
             return Ok(ApiResponse<TicketDto>.SuccessResponse(ticketDto, "Prioridade atualizada com sucesso!"));
         }
 
-        /// <summary>
-        /// Deletar ticket
-        /// </summary>
         [HttpDelete("{id}")]
         public async Task<ActionResult<ApiResponse<object>>> DeleteTicket(int id)
         {
@@ -253,7 +248,6 @@ namespace backendAPI.Controllers
             return Ok(ApiResponse<object>.SuccessResponse(null, "Ticket deletado com sucesso!"));
         }
 
-        // NOVOS ENDPOINTS ESPECÍFICOS PARA O FRONTEND
         [HttpGet("user-simple/{userId}")]
         public async Task<ActionResult<ApiResponse<List<SimpleTicketDto>>>> GetUserTicketsSimple(int userId)
         {
@@ -261,7 +255,7 @@ namespace backendAPI.Controllers
             {
                 var tickets = await _context.Tickets
                     .Where(t => t.UserId == userId)
-                    .Where(t => t.Status == "Aberto") // ✅ Apenas tickets abertos
+                    .Where(t => t.Status == "Aberto")
                     .OrderByDescending(t => t.CreatedAt)
                     .Select(t => new SimpleTicketDto
                     {
@@ -274,12 +268,10 @@ namespace backendAPI.Controllers
                     })
                     .ToListAsync();
 
-                // ✅ USAR O MESMO MÉTODO DE SUCESSO (para manter consistência)
                 return Ok(ApiResponse<List<SimpleTicketDto>>.SuccessResponse(tickets));
             }
             catch (Exception ex)
             {
-                // ✅ USAR O MESMO MÉTODO DE ERRO
                 return BadRequest(ApiResponse<List<SimpleTicketDto>>.ErrorResponse($"Erro ao buscar chamados: {ex.Message}"));
             }
         }
@@ -290,7 +282,7 @@ namespace backendAPI.Controllers
             try
             {
                 var tickets = await _context.Tickets
-                    .Where(t => t.Status == "Aberto") // ✅ Apenas tickets abertos
+                    .Where(t => t.Status == "Aberto")
                     .OrderByDescending(t => t.CreatedAt)
                     .Select(t => new SimpleTicketDto
                     {
@@ -310,17 +302,15 @@ namespace backendAPI.Controllers
                 return BadRequest(ApiResponse<List<SimpleTicketDto>>.ErrorResponse($"Erro: {ex.Message}"));
             }
         }
-        /// <summary>
-        /// Buscar um ticket específico pelo ID do ticket
-        /// </summary>
-        [HttpGet("simples/{id}")] // ✅ Diferente do [HttpGet("user/{userId}")]
-        public async Task<ActionResult<ApiResponse<TicketDto>>> GetTicketById(int id) // ✅ id do ticket, não userId
+
+        [HttpGet("simples/{id}")]
+        public async Task<ActionResult<ApiResponse<TicketDto>>> GetTicketById(int id)
         {
             try
             {
                 var ticket = await _context.Tickets
                     .Include(t => t.Messages)
-                    .Where(t => t.Id == id) // ✅ Busca pelo ID do ticket
+                    .Where(t => t.Id == id)
                     .Select(t => new TicketDto
                     {
                         Id = t.Id,
@@ -331,9 +321,10 @@ namespace backendAPI.Controllers
                         Status = t.Status,
                         CreatedAt = t.CreatedAt,
                         ClosedAt = t.ClosedAt,
-                        MessageCount = t.Messages!.Count
+                        MessageCount = t.Messages!.Count,
+                        ResolvedByIa = ResolvedByIa(t)
                     })
-                    .FirstOrDefaultAsync(); // ✅ FirstOrDefault, não ToList
+                    .FirstOrDefaultAsync();
 
                 if (ticket == null)
                 {
@@ -348,12 +339,6 @@ namespace backendAPI.Controllers
             }
         }
 
-
-        // Adicione estas ações ao seu TicketsController.cs
-
-        /// <summary>
-        /// Contar total de tickets
-        /// </summary>
         [HttpGet("count")]
         public async Task<ActionResult<ApiResponse<int>>> GetTotalTickets()
         {
@@ -361,9 +346,6 @@ namespace backendAPI.Controllers
             return Ok(ApiResponse<int>.SuccessResponse(count));
         }
 
-        /// <summary>
-        /// Contar tickets abertos/em andamento
-        /// </summary>
         [HttpGet("count/abertos")]
         public async Task<ActionResult<ApiResponse<int>>> GetTicketsAbertos()
         {
@@ -373,9 +355,6 @@ namespace backendAPI.Controllers
             return Ok(ApiResponse<int>.SuccessResponse(count));
         }
 
-        /// <summary>
-        /// Contar tickets concluídos
-        /// </summary>
         [HttpGet("count/concluidos")]
         public async Task<ActionResult<ApiResponse<int>>> GetTicketsConcluidos()
         {
@@ -385,9 +364,6 @@ namespace backendAPI.Controllers
             return Ok(ApiResponse<int>.SuccessResponse(count));
         }
 
-        /// <summary>
-        /// Obter estatísticas de tickets por gravidade
-        /// </summary>
         [HttpGet("stats/gravidade")]
         public async Task<ActionResult<ApiResponse<Dictionary<string, int>>>> GetStatsByGravidade()
         {
@@ -399,9 +375,6 @@ namespace backendAPI.Controllers
             return Ok(ApiResponse<Dictionary<string, int>>.SuccessResponse(stats));
         }
 
-        /// <summary>
-        /// Obter estatísticas de tickets por status
-        /// </summary>
         [HttpGet("stats/status")]
         public async Task<ActionResult<ApiResponse<Dictionary<string, int>>>> GetStatsByStatus()
         {
@@ -413,15 +386,15 @@ namespace backendAPI.Controllers
             return Ok(ApiResponse<Dictionary<string, int>>.SuccessResponse(stats));
         }
 
-        /// <summary>
-        /// Top usuários com mais tickets
-        /// </summary>
         [HttpGet("stats/top-usuarios")]
         public async Task<ActionResult<ApiResponse<Dictionary<string, int>>>> GetTopUsuarios()
         {
             var stats = await _context.Tickets
-                .Include(t => t.User)
-                .GroupBy(t => t.User.Name)
+                .GroupBy(t =>
+                {
+                    var name = string.IsNullOrWhiteSpace(t.UserName) ? "Desconhecido" : t.UserName.Trim();
+                    return string.IsNullOrWhiteSpace(name) ? "Desconhecido" : name;
+                })
                 .Select(g => new { Usuario = g.Key, Count = g.Count() })
                 .OrderByDescending(x => x.Count)
                 .Take(10)

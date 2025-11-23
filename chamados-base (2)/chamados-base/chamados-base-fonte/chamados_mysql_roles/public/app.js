@@ -1,10 +1,10 @@
-// Frontend JS para o sistema de chamados (somente front)
-// Mantém o consumo dos endpoints da API .NET sem modificar a API
+﻿// Frontend JS para o sistema de chamados (somente front)
+// MantÃ©m o consumo dos endpoints da API .NET sem modificar a API
 
 const API_BASE = 'http://localhost:5166';
 
 // =========================================================
-// Helpers de sessão/autenticação
+// Helpers de sessÃ£o/autenticaÃ§Ã£o
 // =========================================================
 const STORAGE_KEYS = {
   token: 'token',
@@ -87,7 +87,7 @@ function showAlert(text, type = 'info') {
   const who = document.getElementById('who');
   if (who && state.user) {
     const name = state.user.name || state.user.nome || state.user.email;
-    who.textContent = `${name} • ${state.role || ''}`;
+    who.textContent = `${name} - ${state.role || ''}`;
   }
 }
 
@@ -195,7 +195,7 @@ const API = {
 };
 
 // =========================================================
-// Navegação
+// NavegaÃ§Ã£o
 // =========================================================
 const ROUTES = {
   login: 'login',
@@ -219,7 +219,7 @@ function applyUserInfo() {
   const who = document.getElementById('who');
   if (who && state.user) {
     const name = state.user.name || state.user.nome || state.user.email;
-    who.textContent = `${name} • ${state.role || 'user'}`;
+    who.textContent = `${name} - ${state.role || 'user'}`;
   }
 }
 
@@ -268,7 +268,7 @@ async function handleLogin(event) {
   const result = await API.login(email, password);
 
   if (!result.ok || !result.user || !result.token) {
-    showAlert(result.error || 'Login inválido', 'error');
+    showAlert(result.error || 'Login invÃ¡lido', 'error');
     return;
   }
 
@@ -288,11 +288,23 @@ function mapTicket(raw) {
   return {
     id: raw.id ?? raw.Id,
     userId: raw.userId ?? raw.UserId,
-    userName: raw.userName ?? raw.UserName,
+    userName:
+      raw.userName ??
+      raw.UserName ??
+      raw.nomeUsuario ??
+      raw.nome_usuario ??
+      raw.nome ??
+      raw.Nome ??
+      'Desconhecido',
     severity: raw.severity ?? raw.Severity,
     description: raw.description ?? raw.Description,
     status: (raw.status ?? raw.Status ?? '').toLowerCase(),
-    createdAt: raw.createdAt ?? raw.CreatedAt ?? ''
+    createdAt: raw.createdAt ?? raw.CreatedAt ?? '',
+    resolvedByIa:
+      raw.resolvidoPelaIa ??
+      raw.ResolvidoPelaIa ??
+      raw.resolvido_pela_ia ??
+      false
   };
 }
 
@@ -302,21 +314,21 @@ function statusIsClosed(status) {
   );
 }
 
-// técnico só vê chamados que realmente foram encaminhados pra ele
+// Tecnico sÃ³ vÃª chamados que realmente foram encaminhados pra ele
 function isTechOpenStatus(status) {
   const s = (status || '').toLowerCase();
   return s === 'em_andamento' || s === 'em_atendimento';
 }
 
 // =========================================================
-// Usuário comum
+// UsuÃ¡rio comum
 // =========================================================
 async function loadUserTickets() {
   if (!state.user) return;
   const tbody = document.getElementById('user-hub-tbody');
   if (!tbody) return;
 
-  tbody.innerHTML = '<tr><td colspan="5">Carregando…</td></tr>';
+  tbody.innerHTML = '<tr><td colspan="5">Carregandoâ€¦</td></tr>';
 
   const userId = state.user.id || state.user.Id || state.user.userId;
   const res = await API.get(`/api/Tickets/user/${userId}`);
@@ -370,7 +382,7 @@ async function handleCreateTicket(event) {
   const descricao = (document.getElementById('descricao')?.value || '').trim();
 
   if (!gravidade || !descricao) {
-    showAlert('Preencha gravidade e descrição', 'error');
+    showAlert('Preencha gravidade e descriÃ§Ã£o', 'error');
     return;
   }
 
@@ -403,22 +415,17 @@ function backToUserHub() {
 }
 
 // =========================================================
-// Chat do usuário
+// Chat do usuÃ¡rio
 // =========================================================
 function openUserChat(ticket) {
   state.currentTicketId = ticket.id;
   const header = document.getElementById('user-chat-header');
   if (header)
-    header.textContent = `Chamado #${ticket.id} • ${
-      ticket.description || ''
-    }`;
+    header.textContent = 'Chamado #' + ticket.id + ' - ' + (ticket.description || '');
   setRoute(ROUTES.userChat);
   loadMessagesForRole('user');
   teardownChatPolling();
-  state.messageTimer = setInterval(
-    () => loadMessagesForRole('user', true),
-    4000
-  );
+  state.messageTimer = setInterval(() => loadMessagesForRole('user', true), 4000);
 }
 
 async function loadMessagesForRole(role, silent = false) {
@@ -455,19 +462,24 @@ function renderMessages(messages, role) {
 
   messages.forEach(msg => {
     const div = document.createElement('div');
-    div.className = `msg msg-${msg.senderRole || 'user'}`;
-    div.innerHTML = `
-      <div class="msg-meta">${msg.senderName || msg.senderRole} • ${
-      msg.createdAt || ''
-    }</div>
-      <div class="msg-text">${msg.content || ''}</div>
-    `;
+    const align =
+      (msg.senderRole || '').toLowerCase() ===
+      (role === 'tech' ? 'tech' : 'user')
+        ? 'right'
+        : 'left';
+
+    const name = msg.senderName || msg.senderRole || 'Usuario';
+    const time = msg.createdAt || '';
+    const content = msg.content || '';
+
+    div.className = 'chat-msg ' + align;
+    div.innerHTML = '<div class="msg-content">' + content + '</div>' +
+      '<div class="msg-time">' + name + ' - ' + time + '</div>';
     target.appendChild(div);
   });
 
   target.scrollTop = target.scrollHeight;
 }
-
 async function sendUserMessage() {
   if (!state.user || !state.currentTicketId) return;
   const input = document.getElementById('user-msg');
@@ -503,9 +515,9 @@ async function markTicketComplete() {
     return;
   }
 
-  showAlert('Chamado marcado como concluído', 'success');
+  showAlert('Chamado marcado como concluido', 'success');
 
-  // se for técnico, volta pra lista do técnico
+  // se for Tecnico, volta pra lista do Tecnico
   if (state.role === 'tech' || state.role === 'tecnico') {
     setRoute(ROUTES.techHome);
     loadTechTickets();
@@ -522,20 +534,20 @@ async function requestTechSupport() {
     { status: 'em_andamento' }
   );
   if (!res.ok) {
-    showAlert(res.error || 'Não foi possível chamar o técnico', 'error');
+    showAlert(res.error || 'NÃ£o foi possÃ­vel chamar o Tecnico', 'error');
     return;
   }
 
-  showAlert('Técnico acionado para o chamado', 'info');
+  showAlert('Tecnico acionado para o chamado', 'info');
 }
 
 // =========================================================
-// Técnico
+// Tecnico
 // =========================================================
 async function loadTechTickets() {
   const tbody = document.getElementById('tech-tbody');
   if (!tbody) return;
-  tbody.innerHTML = '<tr><td colspan="5">Carregando…</td></tr>';
+  tbody.innerHTML = '<tr><td colspan="5">Carregandoâ€¦</td></tr>';
 
   const res = await API.get('/api/Tickets');
   if (!res.ok) {
@@ -588,7 +600,7 @@ function openTechChat(ticket) {
   state.currentTicketId = ticket.id;
   const header = document.getElementById('tech-ticket-head');
   if (header)
-    header.textContent = `Chamado #${ticket.id} • ${ticket.userName || ''}`;
+    header.textContent = 'Chamado #' + ticket.id + ' - ' + (ticket.userName || '');
   setRoute(ROUTES.techChat);
   loadMessagesForRole('tech');
   teardownChatPolling();
@@ -623,7 +635,7 @@ async function sendTechMessage() {
 }
 
 // =========================================================
-// Admin - métricas
+// Admin - mÃ©tricas
 // =========================================================
 let chartsCreated = false;
 let ticketsChartInstance = null;
@@ -652,7 +664,7 @@ async function loadAdminMetrics() {
 
   const ticketsRes = await API.get('/api/Tickets');
   if (!ticketsRes.ok) {
-    showAlert(ticketsRes.error || 'Erro ao carregar métricas', 'error');
+    showAlert(ticketsRes.error || 'Erro ao carregar mÃ©tricas', 'error');
     return;
   }
 
@@ -669,6 +681,7 @@ function renderCharts({ tickets, bySeverity, byStatus, byUser }) {
   const ctxTickets = document.getElementById('ticketsChart');
   const ctxGravidades = document.getElementById('gravidadesChart');
   const ctxStatus = document.getElementById('statusChart');
+  const ctxIa = document.getElementById('iaChart');
 
   if (!Object.keys(byUser).length) {
     tickets.forEach(t => {
@@ -686,6 +699,16 @@ function renderCharts({ tickets, bySeverity, byStatus, byUser }) {
     });
   }
 
+  // Chamados resolvidos pela IA: backend pode marcar em resolvedByIa,
+  // senao contamos chamados concluidos sem status de Tecnico
+  const iaResolved =
+    tickets.filter(t => t.resolvedByIa || t.status === 'aberto' || t.status === 'concluido')
+      .length || 0;
+  const iaData = {
+    labels: ['Resolvidos pela IA', 'Demais chamados'],
+    values: [iaResolved, Math.max(tickets.length - iaResolved, 0)]
+  };
+
   if (!chartsCreated) {
     chartsCreated = true;
     ticketsChartInstance = new Chart(ctxTickets, {
@@ -693,7 +716,7 @@ function renderCharts({ tickets, bySeverity, byStatus, byUser }) {
       data: {
         labels: Object.keys(byUser),
         datasets: [
-          { label: 'Chamados por usuário', data: Object.values(byUser) }
+          { label: 'Chamados por usuario', data: Object.values(byUser) }
         ]
       },
       options: { responsive: true }
@@ -716,6 +739,17 @@ function renderCharts({ tickets, bySeverity, byStatus, byUser }) {
       },
       options: { responsive: true }
     });
+
+    if (ctxIa) {
+      iaChartInstance = new Chart(ctxIa, {
+        type: 'doughnut',
+        data: {
+          labels: iaData.labels,
+          datasets: [{ data: iaData.values }]
+        },
+        options: { responsive: true }
+      });
+    }
   } else {
     ticketsChartInstance.data.labels = Object.keys(byUser);
     ticketsChartInstance.data.datasets[0].data = Object.values(byUser);
@@ -730,6 +764,12 @@ function renderCharts({ tickets, bySeverity, byStatus, byUser }) {
     statusChartInstance.data.datasets[0].data =
       Object.values(byStatus);
     statusChartInstance.update();
+
+    if (ctxIa && iaChartInstance) {
+      iaChartInstance.data.labels = iaData.labels;
+      iaChartInstance.data.datasets[0].data = iaData.values;
+      iaChartInstance.update();
+    }
   }
 }
 
@@ -824,3 +864,22 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 console.log('Frontend pronto e apontando para', API_BASE);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
