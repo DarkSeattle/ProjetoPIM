@@ -1,14 +1,16 @@
-﻿using backendAPI.Data;
+using backendAPI.Data;
 using backendAPI.Services;
-using BCrypt.Net; // Necessário para o BCrypt
+using BCrypt.Net; // Necess�rio para o BCrypt
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
-using Microsoft.OpenApi.Models; // ✅ CORRETO: contém OpenApiInfo, OpenApiSecurityScheme, etc.
+using Microsoft.OpenApi.Models; // ? CORRETO: cont�m OpenApiInfo, OpenApiSecurityScheme, etc.
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.IO;
+using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,12 +27,12 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "API Suporte Técnico",
+        Title = "API Suporte T�cnico",
         Version = "v1",
-        Description = "API REST para sistema de suporte técnico com integração MAUI"
+        Description = "API REST para sistema de suporte t�cnico com integra��o MAUI"
     });
 
-    // Configuração do botão "Authorize" para JWT
+    // Configura��o do bot�o "Authorize" para JWT
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -58,7 +60,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 // ========================================
-// Configuração de Autenticação JWT
+// Configura��o de Autentica��o JWT
 // ========================================
 builder.Services.AddAuthentication(options =>
 {
@@ -78,7 +80,7 @@ builder.Services.AddAuthentication(options =>
 });
 
 // ========================================
-// Configuração do Banco de Dados
+// Configura��o do Banco de Dados
 // ========================================
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(
@@ -92,6 +94,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddHttpClient();
 
 // ========================================
 // CORS - Permitir acesso do MAUI
@@ -123,6 +126,7 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.WriteIndented = true;
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     });
+
 // ========================================
 // Configurar Pipeline HTTP
 // ========================================

@@ -1,0 +1,855 @@
+2025-11-22 20:56:18.578 -03:00 [Information] Microsoft.Hosting.Lifetime - Now listening on: http://0.0.0.0:5166
+2025-11-22 20:56:18.582 -03:00 [Information] Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5166
+2025-11-22 20:56:18.585 -03:00 [Information] Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-11-22 20:56:18.586 -03:00 [Information] Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-11-22 20:56:18.587 -03:00 [Information] Microsoft.Hosting.Lifetime - Content root path: C:\Users\filip\Desktop\ProjetoPIM\api\backendAPI
+2025-11-22 20:56:18.663 -03:00 [Warning] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware - Failed to determine the https port for redirect.
+2025-11-22 20:56:19.468 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (22ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:19.468 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (22ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:19.659 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:19.805 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:19.954 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:20.093 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:20.235 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:20.387 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:20.532 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:20.679 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:20.831 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:21.002 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (5ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:21.158 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:21.307 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:21.460 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:21.610 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:21.755 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:21.895 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:22.037 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:22.206 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:22.365 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:22.511 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:22.665 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:22.808 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:22.969 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:23.118 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:23.278 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:23.433 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:23.594 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:23.746 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:23.901 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:24.056 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:24.210 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:24.352 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:24.512 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:24.663 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:24.823 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:24.977 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:25.146 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:25.288 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:25.428 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:25.599 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:25.744 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:25.896 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:26.033 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:26.171 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:26.312 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:26.453 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:26.596 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:26.737 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:26.877 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:27.015 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:27.157 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:27.298 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:27.435 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:27.578 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:27.724 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:27.877 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:28.022 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:28.177 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:28.328 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:28.468 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:28.610 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:28.744 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:28.893 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:29.030 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:29.172 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:29.321 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:29.481 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:29.627 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:29.767 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:29.905 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:30.047 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:30.193 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:30.359 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:30.512 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (4ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:30.668 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:30.847 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:31.001 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:31.153 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:31.296 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:31.448 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:31.588 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:31.758 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:31.898 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:32.037 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:32.183 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:32.344 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:32.485 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:32.623 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:32.775 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:32.960 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:33.114 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:33.268 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:33.411 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:33.550 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:33.701 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:33.841 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:33.981 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:34.146 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:34.292 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:34.435 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:34.573 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:34.717 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:34.856 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:35.029 -03:00 [Information] Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[id] AS [Id], [t].[user_id] AS [UserId], [t].[user_name] AS [UserName], [t].[severity] AS [Severity], [t].[description] AS [Description], [t].[status] AS [Status], [t].[created_at] AS [CreatedAt], [t].[closed_at] AS [ClosedAt], (
+    SELECT COUNT(*)
+    FROM [messages] AS [m]
+    WHERE [t].[id] = [m].[ticket_id]) AS [MessageCount]
+FROM [tickets] AS [t]
+WHERE [t].[user_id] = @__userId_0
+ORDER BY [t].[created_at] DESC
+2025-11-22 20:56:35.134 -03:00 [Information] Microsoft.Hosting.Lifetime - Application is shutting down...
